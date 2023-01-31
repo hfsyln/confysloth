@@ -8,6 +8,7 @@ import ProductsPage from './pages/ProductsPage';
 import ErrorPage from './pages/ErrorPage';
 import NavBar from "./components/NavBar"
 import Footer from "./components/Footer"
+import Filter from './components/Filter';
 
 function App() {
   return (

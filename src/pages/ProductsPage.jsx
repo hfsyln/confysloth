@@ -9,6 +9,7 @@
  import Typography from "@mui/material/Typography";
  import { CardMedia } from "@mui/material";
 import { clearAllProducts, getProduct } from '../features/productSlice';
+import Filter from '../components/Filter';
 
 const ProductsPage = () => {
 
@@ -40,16 +41,19 @@ const ProductsPage = () => {
          <img src={loadinGif} />
        </Box>
      )}
+
+
      {!loading && (
+      <Box sx={{display:"flex", flexDirection:"row", mt:"5rem"}}>
+      <Filter/>
        <Box
-         xs={{ d: "flex", mt:5 }}
          display="flex"
          alignItems="center"
          justifyContent="space-evenly"
          flexWrap="wrap"
        >
          {AllProducts?.map((item, id) => (
-           <Card sx={{ maxWidth: 300, m: 2, maxHeight: 500, minWidth: 300}} key={id}>
+           <Card sx={{ maxWidth: 400, m: 2, maxHeight: 500, minWidth: 400}} key={id}>
                          <CardMedia
                component="img"
                height="250"
@@ -70,6 +74,7 @@ const ProductsPage = () => {
              </CardActions>
            </Card>
          ))}
+       </Box>
        </Box>
      )}
    </>
