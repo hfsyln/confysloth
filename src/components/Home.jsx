@@ -3,17 +3,23 @@ import Typography from '@mui/material/Typography'
 import { Box } from '@mui/system'
 import Container from '@mui/system/Container'
 import React from 'react'
-import hero1 from "../assets/hero-bcg-2.jpeg"
-import hero2 from "../assets/hero-bcg.jpeg"
+import hero1 from '../assets/hero-bcg.jpeg'
+import hero2 from '../assets/hero-bcg-2.jpeg'
 import logo from "../assets/logo.svg"
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import AlarmIcon from '@mui/icons-material/Alarm';
 import { Avatar, CardActionArea, TextField} from '@mui/material';
+import { useNavigate } from 'react-router-dom'
+import {  useSelector } from 'react-redux';
 
 
 const Home = () => {
+
+   const {productList} = useSelector((state) => state.product);
+  const navigate = useNavigate()
+ 
   return (
   
     <Box className='' sx={{justifyContent:"center", }}>
@@ -33,34 +39,48 @@ const Home = () => {
                   
               </Container>
         </Container>
-        
-        <Container sx={{background:"#f1f5f8" , p:"0.5rem"}}>
-                <Typography variant="h4" sx={{mt:"2rem"}} align="center" >
-                Featured Products
-                </Typography>
-{ /* api döndürülecek ilk üçü carda sırayla basılacak */}
-                <Card sx={{ maxWidth: 300, m:"3rem"}}>
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="200"
-                      image={logo} //örnek olarak koyuldu apiden gelecek
-                      alt="green iguana"
-                    />
-                    <CardContent sx={{display:"flex", flexDirection:"row", justifyContent:"space-between", mx:"10px"}}>
-                      <Typography gutterBottom variant="body1" >
-                        ürünün ismi
-                      </Typography>
-                      <Typography variant="body1" color="text.secondary">
-                        $fiyatı
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-                <Button variant="contained" sx={{background:"orange", width:"10rem", display:"block", mx:"auto", mb:"2rem"}}>ALL PRODUCTS</Button>     
-        </Container>
 
-        <Container sx={{background:"#eaded7", height:"25rem"}}>
+
+         
+       <Box sx={{background:"#f1f5f8" , p:"0.5rem",}}>
+                  <Typography variant="h4" sx={{mt:"2rem"}} align="center" >
+                  Featured Products
+                </Typography>
+                <Container sx={{display:"flex"}}>
+                
+                {productList?.slice(0, 3).map((item, index) => {
+                  return(
+                <Card sx={{ maxWidth: 300, m:"3rem", minWidth:300}} key={index}>
+                <CardActionArea>
+                
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={item?.image} //örnek olarak koyuldu apiden gelecek
+                    alt="green iguana"
+                  />
+                  <CardContent sx={{display:"flex", flexDirection:"row", justifyContent:"space-between", mx:"10px"}}>
+                    <Typography gutterBottom variant="body1" >
+                    {item?.name}
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary">
+                     $ {item?.price}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                        </Card>
+                )
+                    
+      
+  })} 
+                 </Container>
+                  <Button onClick={()=>navigate("/products")} variant="contained" sx={{background:"orange", width:"10rem", display:"block", mx:"auto", mb:"2rem"}}>ALL PRODUCTS</Button>     
+          </Box>  
+
+
+
+
+        <Box sx={{background:"#eaded7", height:"25rem"}}>
                 <Container sx={{display:"flex", flexDirection:"row", justifyContent:"space-between",}}>
                               <Typography variant="h4" m="3rem" >
                                 Custom Furniture Built Custom For You
@@ -98,7 +118,8 @@ const Home = () => {
                               </Typography>
                           </Card>
                 </Container>      
-        </Container>
+        </Box>
+
         <Container>
                 <Typography variant="h4" mt="10rem"  >
                 Join our newsletter and get 20% off                
