@@ -8,23 +8,19 @@
  import Button from "@mui/material/Button";
  import Typography from "@mui/material/Typography";
  import { CardMedia } from "@mui/material";
-import { clearAllProducts, getProduct } from '../features/productSlice';
+import {getProduct } from '../features/productSlice';
 import Filter from '../components/Filter';
+import { Container } from '@mui/system';
 
 const ProductsPage = () => {
 
-   const { AllProducts, loading, error} = useSelector((state) => state.products);
+   const { productList, loading, error} = useSelector((state) => state.product);
    const dispatch = useDispatch();
 
    useEffect(() => {
         
      dispatch(getProduct());
-
-//     //! Cleanup function (ComponentDidUnmount)
-//     //! State'de kalan news bilgilerini news sayfasidan ayrildiktan sonra sil.
-      return () => {
-        dispatch(clearAllProducts());
-     };
+    console.log(productList)
       }, []);
 
 
@@ -52,29 +48,31 @@ const ProductsPage = () => {
          justifyContent="space-evenly"
          flexWrap="wrap"
        >
-         {AllProducts?.map((item, id) => (
-           <Card sx={{ maxWidth: 400, m: 2, maxHeight: 500, minWidth: 400}} key={id}>
-                         <CardMedia
-               component="img"
-               height="250"
-               image={item?.image}
-               alt="img"
-             />
-             <CardContent>
-               <Typography gutterBottom variant="p" component="div">
-                 {item?.title}
-               </Typography>
-               <Typography variant="body2" color="text.secondary" sx={{m:1}}>
-                                 {item?.price}$
-               </Typography>
-             </CardContent>
-             <CardActions>
-               <Button size="small">add to Basket</Button>
-               <Button size="small">like</Button>
-             </CardActions>
-           </Card>
-         ))}
-       </Box>
+          {productList?.map((item, index) => (
+                <Card sx={{ maxWidth: 300, m: 5, maxHeight: 600, minWidth:300 }} key={index}>
+                  <CardMedia
+                    component="img"
+                    height="250"
+                    image={item?.image}
+                    alt="img"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {item?.name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {item?.price}$
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small">Add to Basket</Button>
+                    <Button size="small" target="_blank">
+                     Like
+                    </Button>
+                  </CardActions>
+                </Card>
+              ))}
+            </Box>
        </Box>
      )}
    </>

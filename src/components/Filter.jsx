@@ -1,40 +1,48 @@
 import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, Slider, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategory } from '../features/catagorySlice';
 
 const Filter = () => {
 
+    const { productList, loading, error} = useSelector((state) => state.product);
+    const dispatch = useDispatch();
+   
     const [rakam, setRakam]= useState()
     
-    function valuetext(value: number) {
-        return (
-            `${value}`,
-            setRakam(value)
-        )
+      function valuetext(value) {
+        return `${value}`;
+        setRakam(value)
       }
 
+      const handleClick = (e) => {
+        console.log(e.target.value)
+     
+       } 
+    
+
   return (
-    <FormGroup  sx={{width:"10vw",my:"7rem", mx:"2rem", alignItems:"center", gap:"1.5rem"}}>
-        <TextField id="outlined-basic" label="Search" variant="outlined" />
+    <FormGroup  sx={{width:"10vw", my:"7rem", ml:"10rem",  gap:"2rem"}}>
+        <TextField size="small" id="outlined-basic" label="Search" variant="outlined" />
         <Typography variant="h6">Catagory</Typography>
         <Box sx={{display:"flex", flexDirection:"column", alignItems:"start"}}>
-                <Button sx={{color:"grey"}} variant="string" >All</Button>
-                <Button sx={{color:"grey"}} variant="text" >Office</Button>
-                <Button sx={{color:"grey"}} variant="text">Livingroom</Button>
-                <Button sx={{color:"grey"}} variant="text">Kitchen</Button>
-                <Button sx={{color:"grey"}} variant="text">Bedroom</Button>
-                <Button sx={{color:"grey"}} variant="text">Dining</Button>
-                <Button sx={{color:"grey"}} variant="text">Kids</Button>
+                <Button onClick={handleClick} sx={{color:"grey"}} size="small"   value="all" >all</Button>
+                <Button onClick={handleClick} sx={{color:"grey"}} size="small"  value="Office">Office</Button>
+                <Button onClick={handleClick} sx={{color:"grey"}} size="small" value="Livingroom" >Livingroom</Button>
+                <Button onClick={handleClick} sx={{color:"grey"}} size="small" value="Kitchen" >Kitchen</Button>
+                <Button onClick={handleClick} sx={{color:"grey"}} size="small" value="Bedroom" >Bedroom</Button>
+                <Button onClick={handleClick} sx={{color:"grey"}} size="small" value="Dining">Dining</Button>
+                <Button onClick={handleClick} sx={{color:"grey"}} size="small" value="Kids">Kids</Button>
         </Box>
         <Typography variant="h6">Company</Typography>
         <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">all</InputLabel>
         <Select
         sx={{width:"8rem"}}
             // labelId="demo-simple-select-label"
             // id="demo-simple-select"
             // value={age}
-            // label={value}
+            //label={value}
             // onChange={handleChange}
         >
             <MenuItem value={10}>all</MenuItem>
@@ -63,14 +71,14 @@ const Filter = () => {
             valueLabelDisplay="auto"
             step={10}
             marks
-            min={10}
-            max={110}
+            min={0}
+            max={310000}
             />
             </Box>
         <FormControlLabel control={<Checkbox defaultChecked />} label="Free Shipping" />
-        <Button variant="contained" sx={{background:"orange", width:"10rem", display:"block", mx:"auto", mb:"2rem"}}>Clear Filters</Button>  
+        <Button  size="small"  variant="contained" sx={{background:"orange", width:"10rem", display:"block", mx:"auto", mb:"2rem"}}>Clear Filters</Button>  
     </FormGroup>
   )
 }
 
-export default Filter
+
