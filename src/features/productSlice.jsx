@@ -3,6 +3,9 @@ import axios from "axios"
 
 const initialState = {
     productList: [],
+    companyList: [],
+    finalList:[],
+    sortingList:[],
     loading: false,
     error :false,
 } 
@@ -34,6 +37,16 @@ const productSlice = createSlice({
         clearProduct: (state, { payload }) => {
             state.productList = [];
         },
+        setCompany: (state, {payload}) =>{
+            state.companyList = payload;
+        },
+        setSortingList: (state, { payload }) => { 
+            state.sortingList = payload;
+        },
+
+        setFinalList: (state, { payload }) => { 
+            state.finalList = payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -51,6 +64,6 @@ const productSlice = createSlice({
     },
 });
 
-export const { setProduct, } = productSlice.actions;
+export const { setProduct, setCompany,setSortingList,setFinalList } = productSlice.actions;
 
 export default productSlice.reducer;

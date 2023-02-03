@@ -2,9 +2,9 @@ import  Button  from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { Box } from '@mui/system'
 import Container from '@mui/system/Container'
-import React from 'react'
-import hero1 from '../assets/hero-bcg.jpeg'
-import hero2 from '../assets/hero-bcg-2.jpeg'
+import React, { useEffect } from 'react'
+import hero2 from '../assets/hero-bcg.jpeg'
+import hero1 from '../assets/hero-bcg-2.jpeg'
 import logo from "../assets/logo.svg"
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -12,16 +12,23 @@ import CardMedia from '@mui/material/CardMedia';
 import AlarmIcon from '@mui/icons-material/Alarm';
 import { Avatar, CardActionArea, TextField} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
-import {  useSelector } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
+import { getProduct } from '../features/productSlice'
 
 
 const Home = () => {
 
-   const {productList} = useSelector((state) => state.product);
+  const {productList} = useSelector((state) => state.product);
   const navigate = useNavigate()
- 
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getProduct())
+}, [])
+
+
   return (
-  
+  <>
     <Box className='' sx={{justifyContent:"center", }}>
         <Container sx={{display: "flex",flexDirection: "row",justifyContent: "center", }}>
               <Container align="start"  sx={{display:"flex", flexDirection:"column", gap:"20px", width:"30vw", m:"5rem"}}>
@@ -72,9 +79,9 @@ const Home = () => {
                 )
                     
       
-  })} 
+          })} 
                  </Container>
-                  <Button onClick={()=>navigate("/products")} variant="contained" sx={{background:"orange", width:"10rem", display:"block", mx:"auto", mb:"2rem"}}>ALL PRODUCTS</Button>     
+                  <Button onClick={()=>navigate("/product")} variant="contained" sx={{background:"orange", width:"10rem", display:"block", mx:"auto", mb:"2rem"}}>ALL PRODUCTS</Button>     
           </Box>  
 
 
@@ -138,7 +145,7 @@ const Home = () => {
         </Container>
         </Box>
       
-   
+        </>
 
   )
 }

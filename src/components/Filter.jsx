@@ -1,13 +1,18 @@
+import { CleaningServices } from '@mui/icons-material';
 import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, Slider, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategory } from '../features/catagorySlice';
+import { setCategoryList } from '../features/categorySlice';
+import { setCompany, setFinalList } from '../features/productSlice';
+import Category from "./Category"
+import SearchComp from './SearchComp';
 
 const Filter = () => {
 
-    const { productList, loading, error} = useSelector((state) => state.product);
     const dispatch = useDispatch();
+    const { categoryList,choosen, } = useSelector((state) => state.category);
+    const { productList,companyList, finalList } = useSelector((state) => state.product);
    
     const [rakam, setRakam]= useState()
     
@@ -16,50 +21,56 @@ const Filter = () => {
         setRakam(value)
       }
 
-      const handleClick = (e) => {
-        console.log(e.target.value)
-     
-       } 
+       const handleChange = (e) => {
+         e.preventDefault()
+      //   console.log(e.target.value)
+      //   console.log(productList)
+      console.log(productList)
+      dispatch(setCompany(((categoryList?.length ? categoryList : productList)?.filter((item) =>  item?.company == e.target.value ))))
+    //  dispatch(setFinalList(companyList))
+       dispatch(setCategoryList([]))
+      console.log(categoryList)
+      console.log(categoryList?.length ? categoryList : productList)?.filter((item) =>  item?.company === e.target.value)
+        } 
+
+        
+          
     
+     
+        
+      console.log(finalList)
+       console.log(companyList)
 
   return (
-    <FormGroup  sx={{width:"10vw", my:"7rem", ml:"10rem",  gap:"2rem"}}>
-        <TextField size="small" id="outlined-basic" label="Search" variant="outlined" />
-        <Typography variant="h6">Catagory</Typography>
-        <Box sx={{display:"flex", flexDirection:"column", alignItems:"start"}}>
-                <Button onClick={handleClick} sx={{color:"grey"}} size="small"   value="all" >all</Button>
-                <Button onClick={handleClick} sx={{color:"grey"}} size="small"  value="Office">Office</Button>
-                <Button onClick={handleClick} sx={{color:"grey"}} size="small" value="Livingroom" >Livingroom</Button>
-                <Button onClick={handleClick} sx={{color:"grey"}} size="small" value="Kitchen" >Kitchen</Button>
-                <Button onClick={handleClick} sx={{color:"grey"}} size="small" value="Bedroom" >Bedroom</Button>
-                <Button onClick={handleClick} sx={{color:"grey"}} size="small" value="Dining">Dining</Button>
-                <Button onClick={handleClick} sx={{color:"grey"}} size="small" value="Kids">Kids</Button>
-        </Box>
+    <FormGroup  sx={{width:"10vw", m:"5rem",  gap:"2rem"}}>
+         <SearchComp/> 
+         <Category/>
         <Typography variant="h6">Company</Typography>
         <FormControl fullWidth>
-        <Select
-        sx={{width:"8rem"}}
+         <Select
+          // onChange={handleChange}
+        sx={{width:"8rem", height:"2rem"}}
             // labelId="demo-simple-select-label"
             // id="demo-simple-select"
             // value={age}
             //label={value}
-            // onChange={handleChange}
+             onChange={handleChange}
         >
-            <MenuItem value={10}>all</MenuItem>
-            <MenuItem value={20}>marcos</MenuItem>
-            <MenuItem value={30}>liddy</MenuItem>
-            <MenuItem value={40}>ikea</MenuItem>
-            <MenuItem value={50}>caressa</MenuItem>
+            <MenuItem value="all" >all</MenuItem>
+            <MenuItem value="marcos">marcos</MenuItem>
+            <MenuItem value="liddy">liddy</MenuItem>
+            <MenuItem value="ikea">ikea</MenuItem>
+            <MenuItem value="caressa">caressa</MenuItem>
         </Select>
         </FormControl>
         <Typography variant="h6">Color</Typography>
-        <Box>
-        <Button sx={{color:"black"}} variant="text">All</Button>
-        <Button sx={{background:"pink", borderRadius:"50%"}} variant="text"></Button>
-                <Button sx={{background:"green", borderRadius:"50%"}} variant="text"></Button>
-                <Button sx={{background:"blue", borderRadius:"50%"}} variant="text"></Button>
-                <Button sx={{background:"grey", borderRadius:"50%"}} variant="text"></Button>
-                <Button sx={{background:"yellow", borderRadius:"50%"}} variant="text"></Button>
+        <Box sx={{display:"flex", gap:"0.5rem"}}>
+                <button variant="text" style={{border:"none", width:"2rem"}}>All</button>
+                <button style={{width:"1rem",height:"1rem", backgroundColor:"pink",borderRadius:"50%" , border:"none"}} variant="text"></button>
+                <button style={{width:"1rem",height:"1rem", backgroundColor:"green",borderRadius:"50%",border:"none"}} variant="text"></button>
+                <button style={{width:"1rem",height:"1rem", backgroundColor:"blue",borderRadius:"50%",border:"none"}} variant="text"></button>
+                <button style={{width:"1rem",height:"1rem", backgroundColor:"grey",borderRadius:"50%",border:"none"}} variant="text"></button>
+                <button style={{width:"1rem",height:"1rem", backgroundColor:"yellow",borderRadius:"50%",border:"none"}} variant="text"></button>
         </Box>
         <Typography variant="h6">Price</Typography>
         <Box sx={{width:"10rem"}}>
@@ -82,3 +93,4 @@ const Filter = () => {
 }
 
 
+export default Filter ;
