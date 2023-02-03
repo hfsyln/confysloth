@@ -7,22 +7,27 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Modal from '@mui/material/Modal';
+import Cart from './Cart';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 
 function NavBar() {
+ 
+ 
   const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+  
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,6 +42,18 @@ function NavBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
   };
 
   return (
@@ -106,7 +123,7 @@ function NavBar() {
                   </Typography>
               </MenuItem>
               <MenuItem >
-                  <Typography textAlign="center" onClick={()=>navigate("/products")}>
+                  <Typography textAlign="center" onClick={()=>navigate("/product")}>
                    
                   Product
                   </Typography>
@@ -151,7 +168,7 @@ function NavBar() {
             </Button>
             <Button
              
-             onClick={() => navigate("/products")}
+             onClick={() => navigate("/product")}
              sx={{ my: 2, color: 'black', display: 'block' ,px:'1.5rem' }}
            >
            Products
@@ -160,19 +177,21 @@ function NavBar() {
           </Box>
 
          <Box sx={{ flexGrow: 0  }}>
-                  <Tooltip title="Open settings" >
-              <IconButton onClick={() => navigate("/cart")} sx={{ p: 1}}>
-                              Cart
-                <AddShoppingCartIcon/>
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Open settings">
+                 
+                      <Button onClick={handleOpen}>Cart<AddShoppingCartIcon/></Button>
+                      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                          <Box sx={style}>
+                                <Cart/>
+                          </Box>
+                      </Modal>
+                  
+            
               <IconButton onClick={() => navigate("/login")} sx={{ p: 1 }}>
                              
                               Login
                               <AccountCircleIcon/>
               </IconButton>
-            </Tooltip>
+            
             
           </Box>
         </Toolbar>
