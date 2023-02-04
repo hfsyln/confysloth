@@ -4,6 +4,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import TextField from '@mui/material/TextField';
 import React from 'react'
+
 import { useDispatch, useSelector } from 'react-redux';
 import images from '../assets/logo.svg'
 import { clearAll, removeItemFromCart, setCartCount, setCartItem } from '../features/cartSlice';
@@ -27,6 +28,7 @@ const Cart = () => {
     const handleClear = () => {
         dispatch(clearAll())
     }
+   
     const handleIncrease = (item) => {
         dispatch(setCartItem(item))
         dispatch(setCartCount())
@@ -35,10 +37,10 @@ const Cart = () => {
     return (
 
         <>
-        {cartItem.length ? (
+        {filterCartItem.length ? (
             <Box>
             <div >
-                      {cartItem?.map((item, index) => {
+                      {filterCartItem?.map((item, index) => {
                           return (
                           <div style={{ display: "flex" }} key={index}>
                               <Card sx={{width:"10rem"}}>
