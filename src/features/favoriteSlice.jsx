@@ -1,27 +1,25 @@
-// import { createSlice } from '@reduxjs/toolkit'
+ import { createSlice } from '@reduxjs/toolkit'
 
-// const initialState = {
-//     favoriteList: JSON.parse(localStorage.getItem('items')) || []
+ const initialState = {
+     favoriteList: JSON.parse(localStorage.getItem('items')) || []
+ }
 
-// }
+ const favoriteSlice = createSlice({
+       name: "favorite",
+   initialState,
+   reducers: {
+     addToFavoriteList: (state, { payload }) => {
+       state.favoriteList = [...state.favoriteList, payload]
+       localStorage.setItem('items', JSON.stringify(state.favoriteList))
+   },
 
-// const favoriteSlice = createSlice({
-//   name: "favorite",
-//   initialState,
-//   reducers: {
-//     addToFavoriteList: (state, { payload }) => {
-//       state.favoriteList = [...state.favoriteList, payload]
-//       localStorage.setItem('items', JSON.stringify(state.favoriteList))
+   removeFromFavouriteList: (state, { payload }) => {
+       state.favoriteList = state.favoriteList.filter(item => item.id !== payload.id)
+       localStorage.setItem('items', JSON.stringify(state.favoriteList))
+   }
+   }
+ });
+ export const {addToFavoriteList, removeFromFavouriteList } = favoriteSlice.actions
 
-//   },
-//   removeFromFavouriteList: (state, { payload }) => {
-//       state.favoriteList = state.favoriteList.filter(item => item.id !== payload.id)
-//       localStorage.setItem('items', JSON.stringify(state.favoriteList))
-//   }
-//   }
-// });
 
-// export const {addToFavoriteList,
-//   removeFromFavouriteList } = favoriteSlice.actions
-
-// export default favoriteSlice.reducer
+export default favoriteSlice.reducer

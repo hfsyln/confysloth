@@ -15,7 +15,8 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Modal from '@mui/material/Modal';
 import Cart from './Cart';
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Favorite from "../components/Favorite"
 
 
 function NavBar() {
@@ -182,6 +183,12 @@ function NavBar() {
                       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                           <Box sx={style}>
                                 <Cart/>
+                          </Box>
+                      </Modal>
+                      <Button onClick={handleOpen}><FavoriteIcon /></Button>
+                      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                          <Box sx={style}>
+                                 <Favorite/>
                           </Box>
                       </Modal>
                   
