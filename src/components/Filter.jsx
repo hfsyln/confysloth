@@ -11,8 +11,8 @@ import SearchComp from './SearchComp';
 const Filter = () => {
 
     const dispatch = useDispatch();
-    const { categoryList,choosen, } = useSelector((state) => state.category);
-    const { productList,companyList, finalList } = useSelector((state) => state.product);
+    const { categoryList,category, } = useSelector((state) => state.category);
+    const { productList,companyList, finalList, company } = useSelector((state) => state.product);
    
     const [rakam, setRakam]= useState()
     
@@ -23,23 +23,40 @@ const Filter = () => {
 
        const handleChange = (e) => {
          e.preventDefault()
-      //   console.log(e.target.value)
-      //   console.log(productList)
+        console.log(e.target.value)
+        dispatch(setCompany(e.target.value))
       console.log(productList)
-      dispatch(setCompany(((categoryList?.length ? categoryList : productList)?.filter((item) =>  item?.company == e.target.value ))))
+      
+    //  productList.filter((item)=>(item.category === category && item.company == company))
+    //  console.log(productList?.filter((item) => (item?.company === company)))
+      if(!category){
+        dispatch(setFinalList(productList?.filter((item)=>(item?.company === company)))) 
+        
+      }else {
+        dispatch(setFinalList(productList?.filter((item)=>(item?.category === category && item?.company == company))))
+        
+      }
+      
+    
+
+
+
+    //  dispatch(setCompany(((categoryList?.length ? categoryList : productList)?.filter((item) =>  item?.company == e.target.value ))))
     //  dispatch(setFinalList(companyList))
-       dispatch(setCategoryList([]))
-      console.log(categoryList)
-      console.log(categoryList?.length ? categoryList : productList)?.filter((item) =>  item?.company === e.target.value)
+      //  dispatch(setCategoryList([]))
+      // console.log(categoryList)
+      // console.log(categoryList?.length ? categoryList : productList)?.filter((item) =>  item?.company === e.target.value)
         } 
 
         
           
     
-     
-        
-      console.log(finalList)
-       console.log(companyList)
+        console.log((productList?.filter((item)=>(item.category === category  && item.company === company )))) 
+     //   console.log((productList?.filter((item)=>(item.category === category  && item.company === company)))) 
+      console.log(productList?.filter((item) => (item?.company === company)))  
+     console.log(finalList)
+       console.log(company)
+
 
   return (
     <FormGroup  sx={{width:"10vw", m:"5rem",  gap:"2rem"}}>

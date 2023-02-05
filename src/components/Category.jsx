@@ -1,36 +1,47 @@
  import { Box, Button, Typography } from '@mui/material'
 import { useEffect } from 'react';
  import { useDispatch, useSelector } from 'react-redux';
- import {  setChoosen,setCategoryList } from '../features/categorySlice'
-import { setCompany, setFinalList } from '../features/productSlice';
+ import {  setCategory,setCategoryList } from '../features/categorySlice'
+import { getProduct, setCompany, setFinalList, setProduct } from '../features/productSlice';
 
  const Category = () => {
 
     const dispatch = useDispatch();
-    const { categoryList,choosen, } = useSelector((state) => state.category);
-    const { productList, finalList, companyList } = useSelector((state) => state.product);
+    const { categoryList, category, } = useSelector((state) => state.category);
+    const { productList, finalList, companyList, company} = useSelector((state) => state.product);
   
 
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        // dispatch(setChoosen(e.target.value))
+        console.log("hellooooo")
+        console.log(e.target.value)
+        dispatch(setCategory(e.target.value))
         console.log(productList)
-        dispatch(setCategoryList((companyList?.length ? companyList : productList)?.filter((item) =>  item?.category == e.target.value )))
-        dispatch(setCompany([]))
-        // console.log(choosen)
-        // console.log(e.target.value)
-        // dispatch(setFinalList(categoryList?.lenght ? categoryList : productList))
-        // dispatch(setFinalList(categoryList))
-       // console.log(finalList)
+       // burada prıduct u değiştirecek filtreleyecek olan fonksiyonu çağıracağız
+       
+        console.log(productList?.filter((item) => (item?.category === category)))
+        
+        if(!company){
+            dispatch(setFinalList(productList?.filter((item) => (item?.category === e.target.value))))
+          console.log("hello")
+        }else {
+            dispatch(setFinalList(productList?.filter((item)=>(item?.category === e.target.value && item?.company === company)))) 
+            
+        }
+        
+       
+
+       
      }
      
-        
   
-   
-    
-      console.log(finalList)
-     console.log(categoryList)
+ //  console.log((productList?.filter((item)=>(item?.category === category  && item?.company === company ))))
+  //   console.log(productList?.filter((item) => (item?.category === category)))
+        console.log(productList)
+        console.log(category)
+        console.log(company)    
+        console.log(finalList)
   
      return (
 

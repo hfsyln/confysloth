@@ -21,7 +21,7 @@ const Product = () => {
     }, [])
     
     
-    console.log(finalList)
+   
     
     return (
     <>
@@ -48,7 +48,7 @@ const Product = () => {
               justifyContent="space-between"
               flexWrap="wrap"
             >
-            { ((companyList?.length ? companyList : (categoryList?.length ? categoryList : productList) ))?.map((item, index) => (
+            { (finalList?.length ? finalList : productList)?.map((item, index) => (
                <CardCom item={item} index={index} />
               ))}
               </Box>
