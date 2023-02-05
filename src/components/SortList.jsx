@@ -45,7 +45,7 @@ const SortList = () => {
   return (
       <>
           <Box display="flex" alignItems="center" >
-              <p>{(categoryList?.length ?   categoryList : productList)?.length} Products Found</p>
+              <p>{finalList?.length ? finalList?.length : productList?.length} Products Found</p>
               <hr  style={{ width:"50%", display: "block", margin:"1rem",
                   border: "none",
                 borderBottom:"1px solid #808080",

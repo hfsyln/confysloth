@@ -46,16 +46,16 @@ const Cart = () => {
                                               {/* <TextField id="outlined-basic" variant="outlined"
                                                   value={(basketItem?.filter((i) => i?.id === item?.id)).length}
                                                   size="small" /> */}
-                                              <div>
+                                              {/* <div>
                                                   <ArrowDropUpIcon style={{ height: "1rem" }} onClick={() => handleIncrease(item)} />
                                                   <ArrowDropDownIcon style={{ height: "1rem" }}
                                                       onClick={() => handleDecrease(item)} />
-                                              </div>
+                                              </div> */}
                                           </div>
                                       </div>
                                       <div>
-                                          <DeleteForeverIcon
-                                              onClick={() => handleDelete(item)} />
+                                          {/* <DeleteForeverIcon
+                                              onClick={() => handleDelete(item)} /> */}
                                       </div>
                                   </CardContent>
                               </Card>

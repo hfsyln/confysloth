@@ -14,19 +14,18 @@ const CardCom = ({ item, index }) => {
 
 
   
-     const handleAddToCart = (item) => {
-        dispatch(setCartItem(item))
-        dispatch(setCartCount())
-
-      
-        if (!filterCartItem.length) {
-            dispatch(setFilterCartItem(item))
-        }
-        else if  (!filterCartItem.map((i) => i.id).includes(item.id)
-        ) {
-            dispatch(setFilterCartItem(item))
-        }
-     }
+    const handleAddToCart = (item) => {
+      dispatch(setCartItem(item))
+      dispatch(setCartCount())
+      console.log(filterCartItem.filter((i) => i.id !== item.id).length)
+      if (!filterCartItem.length) {
+          dispatch(setFilterCartItem(item))
+      }
+      else if  (!filterCartItem.map((i) => i.id).includes(item.id)
+      ) {
+          dispatch(setFilterCartItem(item))
+      }
+   }
 
     
     
@@ -68,7 +67,7 @@ const CardCom = ({ item, index }) => {
                   <CardActions>
                     <Button onClick={()=>handleAddToCart(item)} size="small">Add to Cart</Button>
                     <Button  size="small" target="_blank" onClick={() => handleFavorite(item)}>
-                    <FavoriteBorderIcon />
+  
                    {favoriteList?.map((i)=>i.id).includes(item.id)  ? <FavoriteBorderIcon sx={{fill:"red"}}/> : <FavoriteBorderIcon />}   
                     
                     </Button>

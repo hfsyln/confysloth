@@ -30,10 +30,10 @@ const Filter = () => {
     //  productList.filter((item)=>(item.category === category && item.company == company))
     //  console.log(productList?.filter((item) => (item?.company === company)))
       if(!category){
-        dispatch(setFinalList(productList?.filter((item)=>(item?.company === company)))) 
+        dispatch(setFinalList(productList?.filter((item)=>(item?.company === e.target.value)))) 
         
       }else {
-        dispatch(setFinalList(productList?.filter((item)=>(item?.category === category && item?.company == company))))
+        dispatch(setFinalList(productList?.filter((item)=>(item?.category === category && item?.company == e.target.value))))
         
       }
       

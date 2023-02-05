@@ -25,10 +25,13 @@ function NavBar() {
   const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [open, setOpen] = React.useState(false);
+  const [openCart, setOpenCart] = React.useState(false);
+  const [openFav, setOpenFav] = React.useState(false);
   
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpenCart = () => setOpenCart(true);
+  const handleOpenFav = () => setOpenFav(true);
+  const handleCloseCart = () => setOpenCart(false);
+  const handleCloseFav = () => setOpenFav(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -179,18 +182,20 @@ function NavBar() {
 
          <Box sx={{ flexGrow: 0  }}>
                  
-                      <Button onClick={handleOpen}>Cart<AddShoppingCartIcon/></Button>
-                      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                      <Button onClick={handleOpenCart}>Cart<AddShoppingCartIcon/></Button>
+                      <Modal open={openCart} onClose={handleCloseCart} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                           <Box sx={style}>
                                 <Cart/>
                           </Box>
                       </Modal>
-                      <Button onClick={handleOpen}><FavoriteIcon /></Button>
-                      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                     
+                     
+                       <Button onClick={handleOpenFav}><FavoriteIcon /></Button>
+                      <Modal open={openFav} onClose={handleCloseFav} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                           <Box sx={style}>
                                  <Favorite/>
                           </Box>
-                      </Modal>
+                      </Modal> 
                   
             
               <IconButton onClick={() => navigate("/login")} sx={{ p: 1 }}>
