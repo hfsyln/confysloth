@@ -50,7 +50,7 @@ const cartSlice = createSlice({
             localStorage.setItem('cart', JSON.stringify(state.cartItem))
             state.filterCartItem = []
             localStorage.setItem('filtercart', JSON.stringify(state.filterCartItem))
-            state.cartCount = ""
+            state.cartCount = state.cartItem.length
             localStorage.setItem('cartCount', JSON.stringify(state.cartCount))
         },
 

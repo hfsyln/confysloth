@@ -17,12 +17,16 @@ import Modal from '@mui/material/Modal';
 import Cart from './Cart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Favorite from "../components/Favorite"
+import Badge from '@mui/material/Badge';
+import { useSelector } from 'react-redux';
+
 
 
 function NavBar() {
  
  
   const navigate = useNavigate()
+  const { cartOpen, cartItem, cartCount ,filterCartItem} = useSelector((state) => state.cart);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openCart, setOpenCart] = React.useState(false);
@@ -182,7 +186,11 @@ function NavBar() {
 
          <Box sx={{ flexGrow: 0  }}>
                  
-                      <Button onClick={handleOpenCart}>Cart<AddShoppingCartIcon/></Button>
+                      <Button onClick={handleOpenCart}>Cart
+                            <Badge badgeContent={cartCount} color="warning">
+                                <AddShoppingCartIcon/>
+                            </Badge> 
+                      </Button>
                       <Modal open={openCart} onClose={handleCloseCart} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                           <Box sx={style}>
                                 <Cart/>
