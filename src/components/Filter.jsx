@@ -1,4 +1,4 @@
-import { CleaningServices } from '@mui/icons-material';
+import { CleaningServices, Search } from '@mui/icons-material';
 import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, Slider, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
@@ -12,7 +12,7 @@ const Filter = () => {
 
     const dispatch = useDispatch();
     const { categoryList,category, } = useSelector((state) => state.category);
-    const { productList,companyList, finalList, company } = useSelector((state) => state.product);
+    const { productList,companyList, finalList, company, search } = useSelector((state) => state.product);
    
     const [rakam, setRakam]= useState()
     
@@ -21,7 +21,7 @@ const Filter = () => {
         setRakam(value)
       }
 
-       const handleChange = (e) => {
+ const handleChange = (e) => {
          e.preventDefault()
         console.log(e.target.value)
         dispatch(setCompany(e.target.value))
@@ -29,11 +29,15 @@ const Filter = () => {
       
     //  productList.filter((item)=>(item.category === category && item.company == company))
     //  console.log(productList?.filter((item) => (item?.company === company)))
-      if(!category){
+      if(!category && !search){
         dispatch(setFinalList(productList?.filter((item)=>(item?.company === e.target.value)))) 
         
-      }else {
-        dispatch(setFinalList(productList?.filter((item)=>(item?.category === category && item?.company == e.target.value))))
+      }else if(!category){
+        dispatch(setFinalList(productList?.filter((item)=>(item?.company === e.target.value && item?.name.includes(search)))))
+      }else if(!search){
+        dispatch(setFinalList(productList?.filter((item)=>(item?.company === e.target.value && item?.category == category))))
+      }else  {
+        dispatch(setFinalList(productList?.filter((item)=>(item?.category === category && item?.company == e.target.value && item?.name.includes(search)))))
         
       }
       

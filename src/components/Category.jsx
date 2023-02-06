@@ -8,7 +8,7 @@ import { getProduct, setCompany, setFinalList, setProduct } from '../features/pr
 
     const dispatch = useDispatch();
     const { categoryList, category, } = useSelector((state) => state.category);
-    const { productList, finalList, companyList, company} = useSelector((state) => state.product);
+    const { productList, finalList, companyList, company, search} = useSelector((state) => state.product);
   
 
     
@@ -20,13 +20,18 @@ import { getProduct, setCompany, setFinalList, setProduct } from '../features/pr
         console.log(productList)
        // burada prıduct u değiştirecek filtreleyecek olan fonksiyonu çağıracağız
        
-        console.log(productList?.filter((item) => (item?.category === category)))
+      //  console.log(productList?.filter((item) => (item?.category === category)))
         
-        if(!company){
+
+        if(!company && !search){
             dispatch(setFinalList(productList?.filter((item) => (item?.category === e.target.value))))
+        }else if(!company){
+            dispatch(setFinalList(productList?.filter((item) => (item?.category === e.target.value && item?.name.includes(search)))))
           console.log("hello")
+        }else if(!search){
+             dispatch(setFinalList(productList?.filter((item) => (item?.category === e.target.value && item?.company === company))))
         }else {
-            dispatch(setFinalList(productList?.filter((item)=>(item?.category === e.target.value && item?.company === company)))) 
+            dispatch(setFinalList(productList?.filter((item)=>(item?.category === e.target.value && item?.company === company && item?.name.includes(search))))) 
             
         }
         
