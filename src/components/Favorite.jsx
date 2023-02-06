@@ -9,12 +9,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import images from '../assets/logo.svg'
 import { clearAll, removeItemFromCart, setCartCount, setCartItem } from '../features/cartSlice';
 import { useNavigate } from 'react-router-dom';
+import { removeFromFavouriteList } from '../features/favoriteSlice';
 
 const Cart = () => {
 
     const { favoriteList } = useSelector(state => state.favorite)
     const dispatch = useDispatch();
     const navigate = useNavigate()
+
+    const handleDelete = (item) => {
+        dispatch(removeFromFavouriteList(item))   
+    }
+
 
    
     return (
@@ -35,27 +41,17 @@ const Cart = () => {
                                   <CardContent style={{ display: "flex", justifyContent: "space-between" }}>
                                       <div>
                                           <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
-                                              {item?.title}
+                                              {item?.name}
                                           </Typography>
 
                                           <Typography sx={{ fontSize: 14, color: "red", fontWeight: "bold" }} >
-                                              {item?.price} TL
+                                              $ {item?.price}
                                           </Typography>
-                                          <div style={{ fontSize: 12, color: "black", fontWeight: "bold", display: "flex", justifyContent: "flex-start" }} >
-
-                                              {/* <TextField id="outlined-basic" variant="outlined"
-                                                  value={(basketItem?.filter((i) => i?.id === item?.id)).length}
-                                                  size="small" /> */}
-                                              {/* <div>
-                                                  <ArrowDropUpIcon style={{ height: "1rem" }} onClick={() => handleIncrease(item)} />
-                                                  <ArrowDropDownIcon style={{ height: "1rem" }}
-                                                      onClick={() => handleDecrease(item)} />
-                                              </div> */}
-                                          </div>
+                                        
                                       </div>
                                       <div>
-                                          {/* <DeleteForeverIcon
-                                              onClick={() => handleDelete(item)} /> */}
+                                           <DeleteForeverIcon
+                                              onClick={() => handleDelete(item)} /> 
                                       </div>
                                   </CardContent>
                               </Card>
