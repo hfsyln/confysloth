@@ -3,6 +3,7 @@ import './App.css';
 import HomePage from './components/Home';
 import AboutPage from './pages/AboutPage';
 import LoginPage from './pages/LoginPage';
+import Register from './pages/Register';
 import CardPage from './pages/CardPage';
 import Product from './components/Product';
 import ErrorPage from './pages/ErrorPage';
@@ -18,6 +19,7 @@ function App() {
       <Routes>
       <Route path='/' element={<HomePage/>}/>
       <Route path='/login' element={<LoginPage/>}/>
+      <Route path='/register' element={<Register/>}/>
       <Route path='/about' element={<AboutPage/>}/>
         <Route path='/cart' element={<CardPage />} />
         <Route path='/product' element={<Product />} />
