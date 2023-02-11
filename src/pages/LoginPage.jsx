@@ -45,11 +45,14 @@ const signInGoog = () => {
               <input  value={loginEmail} type="text" onChange={(e)=> {setLoginEmail(e.target.value)} }/>
           </Box>
           <Box sx={{mx:"5",  display:"flex", flexDirection: "column", gap:"1rem"}}>
-              <label  className="form-label">Password</label>
+              <label  className="form-label">Password:</label>
               <input value={loginPass} type="password" onChange={(e)=> {setLoginPass(e.target.value)}}/>
           </Box>
+          <Box sx={{display:"flex"}}>
           <Button  onClick={login}>login</Button>
           <Button  onClick={signInGoog}>Sing In with Google</Button>
+          </Box>
+          <Button sx={{mb:"1rem"}}  onClick={()=>navigate("/register")}>Register</Button>
           </Box>
           
         
