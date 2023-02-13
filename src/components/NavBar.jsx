@@ -13,12 +13,14 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import avatar from "../assets/profil.webp"
 import Modal from '@mui/material/Modal';
 import Cart from './Cart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Favorite from "../components/Favorite"
 import Badge from '@mui/material/Badge';
 import { useSelector } from 'react-redux';
+import { logOut} from '../firebaseConfig';
 
 
 
@@ -26,7 +28,8 @@ function NavBar() {
  
  
   const navigate = useNavigate()
-  const { cartOpen, cartItem, cartCount ,filterCartItem} = useSelector((state) => state.cart);
+  const { cartCount } = useSelector((state) => state.cart);
+  const { currentUser} = useSelector((state) => state.users);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openCart, setOpenCart] = React.useState(false);
@@ -64,6 +67,7 @@ function NavBar() {
     p: 4,
   };
 
+  console.log(currentUser)
   return (
     <AppBar position="static">
       <Container maxWidth="xl" sx={{backgroundColor:'white'}}>
@@ -205,13 +209,20 @@ function NavBar() {
                           </Box>
                       </Modal> 
                   
-            
+             {currentUser ? (
+              <>
+              <Typography className="mr-2 capitalize">{currentUser?.displayName}</Typography>
+              <Button className="btn btn-outline-light" type="submit" onClick={() => logOut()}>logOut</Button>
+              <img src={currentUser?.photoURL || avatar} style={{ height: 25, width: 25 }}/>
+            </> ) :
+            (<> 
               <IconButton onClick={() => navigate("/login")} sx={{ p: 1 }}>
                              
                               Login
-                              <AccountCircleIcon/>
+                              {/* <AccountCircleIcon/> */}
               </IconButton>
-            
+             </>) 
+          } 
             
           </Box>
         </Toolbar>
