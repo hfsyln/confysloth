@@ -4,6 +4,7 @@ import {getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOu
 
 
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyBJSpBhJD4btm0kk01Dz7hvB_HRhWkDGkw",
   authDomain: "confysloth.firebaseapp.com",
@@ -16,6 +17,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider()
+
 
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
@@ -31,21 +33,6 @@ export const signInWithGoogle = () => {
 
 export const auth = getAuth(app)
 
-
-
-export const userObserver = (setCurrentUser) => {
-  //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const {email, displayname, photoURL} = user
-      setCurrentUser({email, displayname, photoURL})
-      console.log(user);
-    } else {
-      console.log("user signed out");
-      setCurrentUser(false)
-    }
-  });
-};
 
 export const logOut = () => {
   signOut(auth);

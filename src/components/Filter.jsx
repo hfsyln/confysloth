@@ -77,7 +77,7 @@ const Filter = () => {
             //label={value}
              onChange={handleChange}
         >
-            <MenuItem value="all" >all</MenuItem>
+            <MenuItem value="" >all</MenuItem>
             <MenuItem value="marcos">marcos</MenuItem>
             <MenuItem value="liddy">liddy</MenuItem>
             <MenuItem value="ikea">ikea</MenuItem>

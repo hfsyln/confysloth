@@ -14,6 +14,9 @@ import { Avatar, CardActionArea, TextField} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import {  useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../features/productSlice'
+import { auth, userObserver } from '../firebaseConfig'
+import { setCurrentUser } from '../features/usersSlice'
+import { onAuthStateChanged } from 'firebase/auth'
 
 
 const Home = () => {
@@ -22,9 +25,26 @@ const Home = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  
+const userObserver = (setCurrentUser) => {
+  //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const {email, displayname, photoURL} = user
+     dispatch(setCurrentUser({email, displayname, photoURL}))
+      console.log(user);
+    } else {
+      console.log("user signed out");
+      dispatch(setCurrentUser(false))
+    }
+  });
+};
+
   useEffect(() => {
     dispatch(getProduct())
+    userObserver(setCurrentUser);
 }, [])
+
 
 
   return (
