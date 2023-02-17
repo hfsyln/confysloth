@@ -11,35 +11,31 @@ const SortList = () => {
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
-        if (!categoryList?.length) {
-            if (e.target.value === "Lowest") {
-                let descendingOrder = [...productList.values()].sort((a, b) => a.price - b.price)
-                // dispatch(setSortingList(descendingOrder))
-                dispatch(setProduct(descendingOrder))
-
-            } else if (e.target.value === "Highest") {
-                let ascendingOrder = [...productList.values()].sort((a, b) => b.price - a.price)
-                // dispatch(setSortingList(ascendingOrder))
-                dispatch(setProduct(ascendingOrder))
-            }
-            
-        }
-           if(categoryList?.length){
-            if (e.target.value === "Lowest") {
-                let descendingOrder = [...categoryList.values()].sort((a, b) => a.price - b.price)
-                // dispatch(setSortingList(descendingOrder))
-                dispatch(setCategoryList(descendingOrder))
        
-
-            } else if (e.target.value === "Highest") {
-                let ascendingOrder = [...categoryList.values()].sort((a, b) => b.price - a.price)
-                // dispatch(setSortingList(ascendingOrder))
-                dispatch(setCategoryList(ascendingOrder))
-            }
+        if (e.target.value === "Lowest") {
+            let descendingOrder = [...(finalList?.length ? finalList : productList).values()].sort((a, b) => a.price - b.price)
+            // dispatch(setSortingList(descendingOrder))
+            finalList?.length ?  dispatch(setFinalList(descendingOrder))  : dispatch(setProduct(descendingOrder))
+        } 
+        if (e.target.value === "Highest") {
+            let ascendingOrder = [...(finalList?.length ? finalList :productList).values()].sort((a, b) => b.price - a.price)
+            // dispatch(setSortingList(ascendingOrder))
+            finalList?.length ?  dispatch(setFinalList(ascendingOrder))  : dispatch(setProduct(ascendingOrder))
         }
-       
+        
+        if (e.target.value === "ZtoA") {
+            let alfabeticOrder = [...(finalList?.length ? finalList : productList).values()].sort((a, b) => -1 * a.name.localeCompare(b.name))
+            finalList?.length ?  dispatch(setFinalList(alfabeticOrder))  : dispatch(setProduct(alfabeticOrder))
+        }
+    
+            if (e.target.value === "AtoZ") {
+            let nonAlfabeticOrder = [...(finalList?.length ? finalList : productList).values()].sort((a, b) => -1 * b.name.localeCompare(a.name))
+            finalList?.length ?  dispatch(setFinalList(nonAlfabeticOrder))  : dispatch(setProduct(nonAlfabeticOrder))
+        }
+    
+   
 
-    }
+}
     
 
   return (
