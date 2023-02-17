@@ -33,8 +33,6 @@ const SortList = () => {
             finalList?.length ?  dispatch(setFinalList(nonAlfabeticOrder))  : dispatch(setProduct(nonAlfabeticOrder))
         }
     
-   
-
 }
     
 
