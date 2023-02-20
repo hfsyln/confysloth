@@ -9,7 +9,7 @@ import Product from './components/Product';
 import ErrorPage from './pages/ErrorPage';
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-import CartDetail from './components/cartDetail';
+import CartDetail from './components/CartDetail';
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
           <Route path='/cart' element={<CardPage />} />
           <Route path='/product' element={<Product />} />
           <Route path='/error' element={<ErrorPage />} />
-          <Route path='/detail' element={<CartDetail/>} />
+          <Route path='/details' element={<CartDetail/>} />
       </Routes>
       <Footer/>
     </BrowserRouter>

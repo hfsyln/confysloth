@@ -52,8 +52,8 @@ const SortList = () => {
                 
                   <option value="Lowest">Price(Lowest)</option>
                   <option value="Highest">Price(Highest)</option>
-                  <option value="A to Z">Price(Name(A-Z))</option>
-                  <option value="Z to A">Price(Name(Z-A))</option>
+                  <option value="AtoZ">Price(Name(A-Z))</option>
+                  <option value="ZtoA">Price(Name(Z-A))</option>
               </select>
         </Box>
       </>

@@ -58,7 +58,7 @@ const userObserver = (setCurrentUser) => {
                       <Typography variant="body1" align="justify">
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum cum fuga laudantium? Excepturi reiciendis minus doloribus quas reprehenderit pariatur alias dolor veniam sit libero architecto, enim atque temporibus ipsam consequuntur!
                       </Typography>
-                      <Button onClick={()=>navigate("/cart")} variant="contained" sx={{background:"orange", width:"10rem"}}>SHOP NOW</Button>     
+                      <Button onClick={()=>navigate("/product")} variant="contained" sx={{background:"orange", width:"10rem"}}>SHOP NOW</Button>     
               </Container>
               <Container sx={{position:"relative", width:"30vw", m:"2rem"}}>
                   <img className='imgone' src={hero2} alt="photobig" />

@@ -1,7 +1,7 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { setCartCount, setCartItem, setFilterCartItem } from '../features/cartSlice';
 import {addToFavoriteList, removeFromFavouriteList} from "../features/favoriteSlice"
@@ -48,7 +48,7 @@ const CardCom = ({ item, index }) => {
 
   return (
       <>
-    <Card sx={{ maxWidth: 300, m: 5, maxHeight: 600, minWidth:300 }} key={index} >
+    <Card sx={{ maxWidth: 300, m: 5, maxHeight: 600, minWidth:300 }} key={index} onClick={()=> {Navigate("/details", {state : item})}}>
                   <CardMedia
                     component="img"
                     width="175"
