@@ -1,28 +1,42 @@
-import { Card, CardActionArea, List, ListItem, Typography } from '@mui/material';
+import { Button, Card, CardActionArea, CardActions, List, ListItem, Typography } from '@mui/material';
 import React from 'react'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useEffect, useState } from 'react'
 import { useLocation } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
-const CartDetail = () => {
+const CartDetail = (handleFavorite, handleAddToCart) => {
 
   const {state} = useLocation()
   console.log(state)
+  const { favoriteList } = useSelector(state => state.favorite)
+
+
 
 
   return (
     <>
-     <Card className="card d-flex flex-row mt-5 mx-auto" style={{width: "50rem", height:"30rem"}}>
-      <img src={(state?.poster_path)} className="card-img-top" />
-      <CardActionArea className="card-body">
-        <Typography className=''>OverView</Typography>
-        <Typography className="card-text">{state?.overview}</Typography>
-          <List className="list-group list-group-flush">
-              <ListItem className="list-group-item">Title :  {state?.title}</ListItem>
-              <ListItem className="list-group-item">Release Date :  {state?.release_date}</ListItem>
-              <ListItem className="list-group-item">Language : {state?.original_language}</ListItem>
-              <ListItem className="list-group-item">Rate : {state?.vote_average}</ListItem>
-          </List>
-      </CardActionArea>
+     <Card   sx={{width: "40rem", height:"42rem", margin:"auto", my:"1rem", textAlign:"center", background:"grey"}}>
+      <img src={(state?.image)} className="card-img-top" style={{height:"17rem", marginTop:"2rem"}} />
+      <CardActions className="card-body" sx={{display:"flex", flexDirection:"column"}}>
+        <List>
+              <ListItem className="list-group-item">Name : {state?.name.toUpperCase()}</ListItem>
+              <ListItem className="list-group-item">Company : {state?.company.toUpperCase()}</ListItem>
+              <ListItem className="list-group-item">Price : ${state?.price}</ListItem>
+              <ListItem className="list-group-item">Category : {state?.category.toUpperCase()}</ListItem>
+        </List>
+        <Typography className="card-text">{state?.description}</Typography>
+       
+         
+      </CardActions>
+      {/* <CardActions>
+                    <Button onClick={()=>handleAddToCart(state)} size="small">Add to Cart</Button>
+                    <Button  size="small" target="_blank" onClick={() => handleFavorite(state)}>
+  
+                   {favoriteList?.map((i)=>i.id).includes(state.id)  ? <FavoriteBorderIcon sx={{fill:"red"}}/> : <FavoriteBorderIcon />}   
+                    
+                    </Button>
+      </CardActions> */}
   </Card>
     </>
   )

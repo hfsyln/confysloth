@@ -8,7 +8,7 @@ import {addToFavoriteList, removeFromFavouriteList} from "../features/favoriteSl
 
 const CardCom = ({ item, index }) => {
    const dispatch = useDispatch()
-  //  const navigate = useNavigate();
+    const navigate = useNavigate();
     const { favoriteList } = useSelector(state => state.favorite)
     const { cartOpen, cartItem ,cartCount,filterCartItem} = useSelector((state) => state.cart);
 
@@ -48,7 +48,9 @@ const CardCom = ({ item, index }) => {
 
   return (
       <>
-    <Card sx={{ maxWidth: 300, m: 5, maxHeight: 600, minWidth:300 }} key={index} onClick={()=> {Navigate("/details", {state : item})}}>
+    <Card sx={{ maxWidth: 300, m: 5, maxHeight: 600, minWidth:300 }} key={index} onClick={()=> {navigate("/details", {state : item}, 
+    // handleAddToCart={handleAddToCart}, handleFavorite={handleFavorite}    
+    )}}>
                   <CardMedia
                     component="img"
                     width="175"
