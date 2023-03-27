@@ -11,7 +11,7 @@ import SortList from "./SortList";
 
 const Product = () => {
   const { productList, loading, error, companyList, finalList } = useSelector((state) => state.product);
-  const { categoryList } = useSelector((state) => state.category);
+  const { filteredList } = useSelector((state) => state.filter);
     const dispatch = useDispatch();
 
 
@@ -20,8 +20,6 @@ const Product = () => {
   
     }, [])
     
-    
-   
     
     return (
     <>
@@ -48,7 +46,7 @@ const Product = () => {
               justifyContent="space-between"
               flexWrap="wrap"
             >
-            { (finalList?.length ? finalList : productList)?.map((item, index) => (
+            { (filteredList?.length ? filteredList : productList)?.map((item, index) => (
                <CardCom item={item} index={index} />
               ))}
               </Box>

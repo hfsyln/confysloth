@@ -4,7 +4,7 @@ import categoryReducer from "../features/categorySlice"
 import cartReducer from "../features/cartSlice"
 import favoriteReducer from "../features/favoriteSlice"
 import usersReducer from "../features/usersSlice"
-
+import filterReducer from "../features/filterSlice";
 export const store =configureStore({
     reducer: {
         product : productReducer,
@@ -12,5 +12,6 @@ export const store =configureStore({
         cart : cartReducer,
         favorite :  favoriteReducer,
         users : usersReducer,
+        filter: filterReducer,
     }
 })
