@@ -14,8 +14,7 @@ import {
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryList } from '../features/categorySlice';
-import { setCompany, setFinalList } from '../features/productSlice';
+
 import { grey } from "@mui/material/colors";
 import { setFilteredList } from "../features/filterSlice";
 import { getUniqueValues } from "../utils/helpers";

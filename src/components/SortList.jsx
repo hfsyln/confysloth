@@ -1,36 +1,40 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryList } from '../features/categorySlice';
-import { setFinalList, setProduct, setSortingList } from '../features/productSlice';
+
+import { setFilteredList } from '../features/filterSlice';
+import {  setProduct, setSortingList } from '../features/productSlice';
 
 const SortList = () => {
 
-    const { productList, finalList, sortingList } = useSelector((state) => state.product);
-    const { categoryList,choosen, } = useSelector((state) => state.category);
+    const { productList, sortingList } = useSelector((state) => state.product);
+    const { filteredList } = useSelector((state) => state.filter);
     const dispatch = useDispatch();
+    const [selection, setSelection] = useState("")
 
-    const handleChange = (e) => {
-       
+   
+
+    const handleSort = (e) => {
+       setSelection(e.target.value)
         if (e.target.value === "Lowest") {
-            let descendingOrder = [...(finalList?.length ? finalList : productList).values()].sort((a, b) => a.price - b.price)
+            let descendingOrder = [...(filteredList?.length ? filteredList : productList).values()].sort((a, b) => a.price - b.price)
             // dispatch(setSortingList(descendingOrder))
-            finalList?.length ?  dispatch(setFinalList(descendingOrder))  : dispatch(setProduct(descendingOrder))
+            filteredList?.length ?  dispatch(setFilteredList(descendingOrder))  : dispatch(setProduct(descendingOrder))
         } 
         if (e.target.value === "Highest") {
-            let ascendingOrder = [...(finalList?.length ? finalList :productList).values()].sort((a, b) => b.price - a.price)
+            let ascendingOrder = [...(filteredList?.length ? filteredList:productList).values()].sort((a, b) => b.price - a.price)
             // dispatch(setSortingList(ascendingOrder))
-            finalList?.length ?  dispatch(setFinalList(ascendingOrder))  : dispatch(setProduct(ascendingOrder))
+            filteredList?.length ?  dispatch(setFilteredList(ascendingOrder))  : dispatch(setProduct(ascendingOrder))
         }
         
         if (e.target.value === "ZtoA") {
-            let alfabeticOrder = [...(finalList?.length ? finalList : productList).values()].sort((a, b) => -1 * a.name.localeCompare(b.name))
-            finalList?.length ?  dispatch(setFinalList(alfabeticOrder))  : dispatch(setProduct(alfabeticOrder))
+            let alfabeticOrder = [...(filteredList?.length ? filteredList : productList).values()].sort((a, b) => -1 * a.name.localeCompare(b.name))
+            filteredList?.length ?  dispatch(setFilteredList(alfabeticOrder))  : dispatch(setProduct(alfabeticOrder))
         }
     
             if (e.target.value === "AtoZ") {
-            let nonAlfabeticOrder = [...(finalList?.length ? finalList : productList).values()].sort((a, b) => -1 * b.name.localeCompare(a.name))
-            finalList?.length ?  dispatch(setFinalList(nonAlfabeticOrder))  : dispatch(setProduct(nonAlfabeticOrder))
+            let nonAlfabeticOrder = [...(filteredList?.length ? filteredList : productList).values()].sort((a, b) => -1 * b.name.localeCompare(a.name))
+            filteredList.length ?  dispatch(setFilteredList(nonAlfabeticOrder))  : dispatch(setProduct(nonAlfabeticOrder))
         }
     
 }
@@ -38,8 +42,8 @@ const SortList = () => {
 
   return (
       <>
-          <Box display="flex" alignItems="center" >
-              <p>{finalList?.length ? finalList?.length : productList?.length} Products Found</p>
+          <Box display="flex" alignItems="center"  sx={{minWidth:"80vw"}} padding="1rem" >
+              <p>{filteredList?.length ? filteredList?.length : productList?.length} Products Found</p>
               <hr  style={{ width:"50%", display: "block", margin:"1rem",
                   border: "none",
                 borderBottom:"1px solid #808080",
@@ -48,7 +52,7 @@ const SortList = () => {
                 <br />
               <label htmlFor="">Sort By</label>
               
-              <select onChange={handleChange} style={{borderStyle:"none", margin:"1rem"}} >
+              <select onChange={handleSort} style={{borderStyle:"none", margin:"1rem"}} >
                 
                   <option value="Lowest">Price(Lowest)</option>
                   <option value="Highest">Price(Highest)</option>

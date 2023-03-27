@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import { CardMedia } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getProduct,setFinalList,setProduct } from '../features/productSlice';
+import { getProduct} from '../features/productSlice';
 import loadinGif from "../assets/loading.gif";
 import Filter from "./Filter";
 import SortList from "./SortList";
@@ -36,14 +36,18 @@ const Product = () => {
           {!loading && (
     <Box sx={{ display: "flex", flexDirection: "row", m: "5rem" }}>
                 
-                <Filter/>
-               <Box sx={{display:"flex", flexDirection:"column", gap:"2rem"}}>
-               <SortList/>
+                        <Filter/>
+
+               <Box sx={{display:"flex", flexDirection:"column", gap:"1rem"}}>
+              
+                        <SortList/>
+            
+               
                 <Box
                xs={{ mt:"3rem"}}
               display="flex"
               alignItems="center"
-              justifyContent="space-between"
+              justifyContent="center"
               flexWrap="wrap"
             >
             { (filteredList?.length ? filteredList : productList)?.map((item, index) => (
